@@ -12,18 +12,28 @@
 
     <div>
       <h3>Tambah pengeluaran baru</h3>
-      <form action="">
-        <input type="text" name="" id="" placeholder="Nama pengeluaran" />
-        <input type="number" name="" id="" placeholder="Jumlah pengeluaran" />
-        <input type="date" name="" id="" />
-        <select name="kategori" id="">
+      <form id="form-pengeluaran">
+        <input
+          type="text"
+          id="nama-pengeluaran"
+          placeholder="Nama pengeluaran"
+          required
+        />
+        <input
+          type="number"
+          id="jumlah-pengeluaran"
+          placeholder="Jumlah pengeluaran"
+          required
+        />
+        <input type="date" id="tanggal-pengeluaran" required />
+        <select id="kategori-pengeluaran" required>
           <option value="Makanan">Makanan</option>
           <option value="Transportasi">Transportasi</option>
           <option value="Kebutuhan Pokok">Kebutuhan Pokok</option>
           <option value="Hiburan">Hiburan</option>
           <option value="Lainnya">Lainnya</option>
         </select>
-        <button type="button">+</button>
+        <button type="button" onclick="addPengeluaran()">+</button>
       </form>
     </div>
 
