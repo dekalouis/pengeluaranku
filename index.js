@@ -331,3 +331,12 @@ function updateNamaUser() {
     location.href = "./main.html";
   }
 }
+
+document
+  .getElementById("nama-user")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      isiNama();
+    }
+  });
