@@ -37,35 +37,32 @@
       </form>
 
     <div class="tabel-pengeluaran">
-      <table>
+      <table id="table-pengeluaran">
         <thead>
           <tr>
-            <th>Pengeluaran</th>
-            <th>Jumlah</th>
-            <th>Tanggal</th>
-            <th>Kategori</th>
+            <th col-index = 1>Pengeluaran</th>
+            <th col-index = 2>Jumlah</th>
+            <th col-index = 3>Kategori</th>
+            <th col-index = 4>Tanggal
+                <select class="table-filter" onchange="filter_rows()">
+                <option value="all"></option>
+            </th>
             <th>Pilihan</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>contoh</td>
-            <td>contoh</td>
-            <td>contoh</td>
-            <td>contoh</td>
-            <td>contoh</td>
-          </tr>
-        </tbody>
+        <tbody id="list-pengeluaran"></tbody>
       </table>
     </div>
 
-    <div>
-      <h2>Total Pengeluaranmu: Rp 10,000</h2>
+    <div class="total-pengeluaran">
+      <h2>Total Pengeluaranmu: 
+        <span id="total-pengeluaran">0</span>
+      </h2>
     </div>
 
     <div class="filter">
-      <label for="select-category">Filter berdasarkan kategori:</label>
-      <select name="" id="select-category">
+      <label for="filter-category">Filter berdasarkan kategori:</label>
+      <select id="filter-category" onchange="filterAllKategori()">
         <option value="Semua">Semua</option>
         <option value="Makanan">Makanan</option>
         <option value="Transportasi">Transportasi</option>
