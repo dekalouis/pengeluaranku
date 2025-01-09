@@ -16,11 +16,33 @@ let expenses = [
     date: "2025-01-01",
     category: "Transportasi",
   },
+  {
+    id: Date.now() + 2,
+    name: "Nonton",
+    amount: 325500,
+    date: "2025-02-02",
+    category: "Hiburan",
+  },
+  {
+    id: Date.now() + 2,
+    name: "Hotel",
+    amount: 65500,
+    date: "2025-03-03",
+    category: "Kebutuhan Pokok",
+  },
+  {
+    id: Date.now() + 2,
+    name: "Nasi Padang",
+    amount: 35500,
+    date: "2025-04-04",
+    category: "Makanan",
+  },
 ];
 
 const formPengeluaran = document.getElementById("form-pengeluaran");
 const listPengeluaran = document.getElementById("list-pengeluaran");
 const totalPengeluaran = document.getElementById("total-pengeluaran");
+const filterKategori = document.getElementById("filter-category")
 
 tampilkanPengeluaran(expenses);
 updateTotalPengeluaran();
@@ -80,5 +102,107 @@ function updateTotalPengeluaran() {
 //3. bikin CRUDnya buat add/edit/delete dll2 - Thomy
 
 //4. bikin function filternya - Raden
+function filterAllKategori() {
+  const category = filterKategori.value;
+  if (category === "Semua") {
+    tampilkanPengeluaran(expenses);
+  } else {
+    const filteredKategori = expenses.filter(
+      (expenses) => expenses.category === category
+    );
+    tampilkanPengeluaran(filteredKategori);
+  }
+}
+ // filter unique value
+getUniqueValuesFromColumn() 
+
+function getUniqueValuesFromColumn() {
+  let unique_col_values_dict = {}
+
+  allFilters = document.querySelectorAll(".table-filter")
+  allFilters.forEach((expenses) => {
+    col_index = expenses.parentElement.getAttribute("col-index")
+    // alert(col_index)
+    const rows = document.querySelectorAll("#table-pengeluaran > tbody > tr")
+
+    rows.forEach((row) => {
+      cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML
+
+      if (col_index in unique_col_values_dict) {
+        if (unique_col_values_dict[col_index].includes(cell_value)) {
+          // alert(cell_value + "is already : " + unique_col_values_dict[col_index])
+        } else {
+          unique_col_values_dict[col_index].push(cell_value)
+          // alert("Array after adding cell value : " + unique_col_values_dict[col_index])
+        }
+      } else {
+        unique_col_values_dict[col_index] = new Array(cell_value)
+      }
+
+    });
+  });
+
+  for (i in unique_col_values_dict) {
+    // alert("column index : " + i + " has unique values : \n" + unique_col_values_dict[i]);
+  }
+
+  updateSelectOptions(unique_col_values_dict)
+
+};
+
+function updateSelectOptions(unique_col_values_dict) {
+  allFilters =  document.querySelectorAll(".table-filter")
+
+  allFilters.forEach((filter_i) => {
+    col_index = filter_i.parentElement.getAttribute('col-index')
+
+    unique_col_values_dict[col_index].forEach((i) => {
+      filter_i.innerHTML = filter_i.innerHTML + `\n<option value="${i}">${i}</option>`
+    });
+  });
+};
+
+
+function filter_rows() {
+  allFilters = document.querySelectorAll(".table-filter")
+  let filter_value_dict = {}
+
+  allFilters.forEach((filter_i) => {
+      col_index = filter_i.parentElement.getAttribute('col-index')
+
+      value = filter_i.value
+      if (value != "all") {
+          filter_value_dict[col_index] = value;
+      }
+  });
+
+  let col_cell_value_dict = {};
+
+  const rows = document.querySelectorAll("#table-pengeluaran tbody tr");
+  rows.forEach((row) => {
+      let display_row = true;
+
+      allFilters.forEach((filter_i) => {
+          col_index = filter_i.parentElement.getAttribute('col-index')
+          col_cell_value_dict[col_index] = row.querySelector("td:nth-child(" + col_index+ ")").innerHTML
+      })
+
+      for (let col_i in filter_value_dict) {
+          filter_value = filter_value_dict[col_i]
+          row_cell_value = col_cell_value_dict[col_i]
+          
+          if (row_cell_value.indexOf(filter_value) == -1 && filter_value != "all") {
+              display_row = false;
+              break;
+          }
+      }
+      if (display_row == true) {
+          row.style.display = "table-row"
+      } else {
+          row.style.display = "none"
+      }
+  })
+
+}
 
 //5. yang styling coba dr luar yaaa ekekkekek - Resya
