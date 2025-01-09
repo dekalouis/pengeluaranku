@@ -1,1 +1,132 @@
 /* STYLING mungkin bisa copas2 dari bootstrap biar cepet? -Resya */
+body {
+    background-color: #1b1d32;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    margin: 0px 50px;
+}
+
+h1 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+#form-pengeluaran {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+form input,
+form select {
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+form input:focus,
+form select:focus {
+    outline-width: 0;
+}
+
+form button {
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 15px;
+    color: white;
+    background-color: #6957f7;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+form button:hover {
+    background-color: #7a6af1;
+    transform: scale(1.1);
+}
+
+.tabel-pengeluaran {
+    background-color: #272942;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.tabel-pengeluaran table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+.tabel-pengeluaran th {
+    border-bottom: 0.5px solid white;
+}
+
+.tabel-pengeluaran th,
+.tabel-pengeluaran td {
+    padding: 10px;
+    text-align: left;
+    color: white;
+}
+
+.btn-edit {
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 10px;
+    color: white;
+    background-color: #6957f7;
+    cursor: pointer;
+}
+
+.btn-edit:hover {
+    background-color: #7a6af1;
+    transform: scale(1.1);
+}
+
+.btn-delete {
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 10px;
+    color: white;
+    background-color: #f2708a;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #f1899e;
+    transform: scale(1.1);
+}
+
+.total-pengeluaran {
+    color: white;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.filter{
+    align-items: center;
+    text-align: right;
+}
+
+.filter select {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.filter select:focus {
+    outline-width: 0;
+}
+
+.filter label {
+    color: white;
+}
