@@ -211,27 +211,28 @@ function updatePengeluaran(id) {
     return;
   }
 
-  let update = null;
   for (let i = 0; i < expenses.length; i++) {
     if (expenses[i].id === id) {
-      update = expenses[i];
+      expenses[i] = {
+        id: id,
+        name: name,
+        amount: amount,
+        date: date,
+        category: category,
+      };
       break;
     }
   }
 
-  update.name = name;
-  update.amount = amount;
-  update.date = date;
-  update.category = category;
+  localStorage.setItem("expenses", JSON.stringify(expenses));
 
-  // Reset tombol kembali ke
+  formPengeluaran.reset();
   const submitButton = document.querySelector("button[type='button']");
   submitButton.innerText = "+";
   submitButton.setAttribute("onclick", "addPengeluaran()");
 
   tampilkanPengeluaran(expenses);
   updateTotalPengeluaran();
-  formPengeluaran.reset();
 }
 
 //4. bikin function filternya - Raden

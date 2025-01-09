@@ -1,77 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pengeluaranku</title>
+
+    <title>Pengeluaranku - Catat Keuangan Anda</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
     <style>
-      * {
-        font-weight: 600;
+      :root {
+        --primary-color: #dbccff;
+        --text-color: #2d2d2d;
+        --accent-color: #7749f8;
       }
+
       body {
-        background-color: #dbccff;
-        margin: 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          #f0e6ff 100%
+        );
+        color: var(--text-color);
+        min-height: 100vh;
+      }
+
+      .hero-container {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #4a4a4a;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .container-image {
         display: flex;
         justify-content: center;
-        align-items: center;
       }
-      h1,
-      h3 {
-        font-weight: bolder;
-        /* outline: 1px solid black; */
+
+      .hero-image {
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+        height: auto;
+        margin: 2rem 0;
       }
-      .hero {
-        display: inline-block;
-        padding: 20px;
+
+      .input-group {
+        background: white;
         border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-control {
+        border: 2px solid #e0e0e0;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.2rem rgba(119, 73, 248, 0.25);
+      }
+
+      .btn-mulai {
+        background-color: var(--accent-color);
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .btn-mulai:hover {
+        background-color: #6234e3;
+        transform: translateY(-2px);
       }
     </style>
   </head>
   <body>
-    <div
-      class="container min-vh-100 d-flex align-items-center justify-content-center"
-    >
-      <div class="text-start p-5">
-        <h1 class="mb-4">Selamat datang di webApp Pengeluaranku!</h1>
-        <img
-          src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTU2ZHo1OWU2ZjFteHFyZTA4NnJ3bGlsM200OWZ1dmV2aHo4azAxdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5fBH6zs8OpCgL9sNdZK/giphy.webp"
-          alt="foto uang"
-          class="img-fluid"
-        />
+    <div class="container min-vh-100 d-flex align-items-center py-5">
+      <div class="hero-container">
+        <h1 class="text-center">Selamat Datang di Pengeluaranku!</h1>
 
-        <h3 class="mb-3">Catat keuanganmu!</h3>
-        <p class="mb-4">
-          Disini kamu bisa mencatat semua pengeluaranmu untuk mengetahui total
-          uang yang sudah kamu keluarkan untuk periode tertentu.
-        </p>
-        <h3 class="mb-3">Sortir berdasarkan kriteria!</h3>
-        <p class="mb-4">
-          Kamu juga dapat memfilter transaksi berdasarkan kategori yang kamu
-          pilih.
-        </p>
-        <h3 class="mb-3">Gas kita mulai!</h3>
-        <p class="mb-4">
-          Tunggu apa lagi? Yuk isi nama kamu dibawah untuk mulai memperbaiki
-          keuanganmu secara mandiri!
-        </p>
-        <form class="mb-4" onsubmit="event.preventDefault(); isiNama();">
-          <div class="mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="nama-user"
-              placeholder="Isi nama kamu disini"
-            />
-          </div>
-          <button type="button" onclick="isiNama()" class="btn btn-dark">
-            Mulai!
-          </button>
-        </form>
+        <div class="container-image">
+          <img
+            src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTU2ZHo1OWU2ZjFteHFyZTA4NnJ3bGlsM200OWZ1dmV2aHo4azAxdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5fBH6zs8OpCgL9sNdZK/giphy.webp"
+            alt="foto uang"
+            class="hero-image img-fluid"
+          />
+        </div>
+
+        <div class="feature-card">
+          <h3>📝 Catat Keuanganmu!</h3>
+          <p>
+            Disini kamu bisa mencatat semua pengeluaranmu untuk mengetahui total
+            uang yang sudah kamu keluarkan untuk periode tertentu.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🔍 Sortir Berdasarkan Kriteria!</h3>
+          <p>
+            Kamu juga dapat memfilter transaksi berdasarkan kategori yang kamu
+            pilih untuk analisis yang lebih mendalam.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🚀 Gas Kita Mulai!</h3>
+          <p>
+            Tunggu apa lagi? Yuk isi nama kamu dibawah untuk mulai memperbaiki
+            keuanganmu secara mandiri!
+          </p>
+
+          <form class="mt-4" onsubmit="event.preventDefault(); isiNama();">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="nama-user"
+                placeholder="Isi nama kamu disini"
+                required
+                aria-label="Nama pengguna"
+              />
+            </div>
+            <button type="submit" class="btn btn-mulai w-100">
+              Mulai Sekarang!
+            </button>
+          </form>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
