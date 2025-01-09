@@ -19,6 +19,11 @@ let expenses = [
 ];
 
 const formPengeluaran = document.getElementById("form-pengeluaran");
+const listPengeluaran = document.getElementById("list-pengeluaran");
+const totalPengeluaran = document.getElementById("total-pengeluaran");
+
+tampilkanPengeluaran(expenses);
+updateTotalPengeluaran();
 
 //1. bikin fungsi tambah pengeluaran (reset) - Deka
 function addPengeluaran() {
@@ -41,10 +46,36 @@ function addPengeluaran() {
 
   console.log(pengeluaran);
   expenses.push(pengeluaran);
+  tampilkanPengeluaran(expenses);
+  updateTotalPengeluaran();
   formPengeluaran.reset();
 }
 
 //2. function render buat displaynya update - Rian
+function tampilkanPengeluaran(pengeluaran) {
+  listPengeluaran.innerHTML = "";
+  pengeluaran.forEach((perPengeluaran) => {
+    const baris = document.createElement("tr");
+
+    baris.innerHTML = `
+    <td>${perPengeluaran.name}</td>
+      <td>Rp ${perPengeluaran.amount.toFixed(2)}</td>
+      <td>${perPengeluaran.category}</td>
+      <td>${perPengeluaran.date}</td>
+      <td>
+        <button onclick="editExpense(${perPengeluaran.id})">Edit</button>
+        <button onclick="deleteExpense(${perPengeluaran.id})">Delete</button>
+      </td>
+    `;
+
+    listPengeluaran.appendChild(baris);
+  });
+}
+
+function updateTotalPengeluaran() {
+  const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  totalPengeluaran.textContent = total.toFixed(2);
+}
 
 //3. bikin CRUDnya buat add/edit/delete dll2 - Thomy
 
