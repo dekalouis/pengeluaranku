@@ -149,7 +149,7 @@ function updatePengeluaran(id) {
 
   // Reset tombol kembali ke
   const submitButton = document.querySelector("button[type='button']");
-  submitButton.innerText = "Tambah";
+  submitButton.innerText = "+";
   submitButton.setAttribute("onclick", "addPengeluaran()");
 
   
