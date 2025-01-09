@@ -199,7 +199,40 @@ function editPengeluaran(id) {
   submitButton.setAttribute("onclick", `updatePengeluaran(${id})`);
 }
 
-//3. bikin CRUDnya buat add/edit/delete dll2 - Thomy
+//Fungsi Update
+function updatePengeluaran(id) {
+  const name = document.getElementById("nama-pengeluaran").value;
+  const amount = Number(document.getElementById("jumlah-pengeluaran").value);
+  const date = document.getElementById("tanggal-pengeluaran").value;
+  const category = document.getElementById("kategori-pengeluaran").value;
+
+  if (!name || !amount || !category || !date) {
+    alert(`Isi dulu yuk datanya!`);
+    return;
+  }
+
+  let update = null;
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id === id) {
+      update = expenses[i];
+      break;
+    }
+  }
+
+  update.name = name;
+  update.amount = amount;
+  update.date = date;
+  update.category = category;
+
+  // Reset tombol kembali ke
+  const submitButton = document.querySelector("button[type='button']");
+  submitButton.innerText = "+";
+  submitButton.setAttribute("onclick", "addPengeluaran()");
+
+  tampilkanPengeluaran(expenses);
+  updateTotalPengeluaran();
+  formPengeluaran.reset();
+}
 
 //4. bikin function filternya - Raden
 function filterAllKategori() {
