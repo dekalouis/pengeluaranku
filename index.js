@@ -56,6 +56,7 @@ function addPengeluaran() {
   //   console.log(name, amount, date, category);
   if (!name || !amount || !category || !date) {
     alert(`Isi dulu yuk datanya!`);
+    return;
   }
 
   let pengeluaran = {
@@ -81,12 +82,21 @@ function tampilkanPengeluaran(pengeluaran) {
 
     baris.innerHTML = `
     <td>${perPengeluaran.name}</td>
-      <td>Rp ${perPengeluaran.amount.toFixed(2)}</td>
+
+<td>Rp ${perPengeluaran.amount.toLocaleString("id-ID", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}</td>
+
       <td>${perPengeluaran.category}</td>
       <td>${perPengeluaran.date}</td>
       <td>
-        <button onclick="editExpense(${perPengeluaran.id})">Edit</button>
-        <button onclick="deleteExpense(${perPengeluaran.id})">Delete</button>
+        <button onclick="editPengeluaran(${
+          perPengeluaran.id
+        })" class="button">Edit</button>
+        <button onclick="hapusPengeluaran(${
+          perPengeluaran.id
+        })" class="button"">Delete</button>
       </td>
     `;
 
@@ -95,12 +105,54 @@ function tampilkanPengeluaran(pengeluaran) {
 }
 
 function updateTotalPengeluaran() {
-  const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-  totalPengeluaran.textContent = total.toFixed(2);
+  let total = 0;
+  for (let i = 0; i < expenses.length; i++) {
+    total += expenses[i].amount;
+  }
+  // totalPengeluaran.textContent = `Rp ${total.toFixed(2)}`;
+  totalPengeluaran.textContent = `Rp ${total.toLocaleString("id-ID", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+//3. bikin CRUDnya buat edit/delete dll2 - Thomy
+//Fungsi Hapus
+function hapusPengeluaran(id) {
+  let newExpenses = [];
+
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id !== id) {
+      newExpenses.push(expenses[i]);
+    }
+  }
+  expenses = newExpenses;
+  tampilkanPengeluaran(expenses);
+  updateTotalPengeluaran();
+}
+
+//Fungsi Edit
+function editPengeluaran(id) {
+  let edit = null;
+
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id === id) {
+      edit = expenses[i];
+      break;
+    }
+  }
+
+  document.getElementById("nama-pengeluaran").value = edit.name;
+  document.getElementById("jumlah-pengeluaran").value = edit.amount;
+  document.getElementById("tanggal-pengeluaran").value = edit.date;
+  document.getElementById("kategori-pengeluaran").value = edit.category;
+
+  const submitButton = document.querySelector("button[type='button']");
+  submitButton.innerText = "Update";
+  submitButton.setAttribute("onclick", `updatePengeluaran(${id})`);
 }
 
 //3. bikin CRUDnya buat add/edit/delete dll2 - Thomy
-
 
 //4. bikin function filternya - Raden
 function filterAllKategori() {
