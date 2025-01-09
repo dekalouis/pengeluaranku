@@ -1,0 +1,84 @@
+<!-- ini buat HTMLnya, kita kerjain pelan2 aja -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengeluaranku</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Pengeluaranku</h1>
+
+      <h3 id="nama-user">Laporan keuangan -nama-</h3>
+      <h3>Tambah pengeluaran baru</h3>
+      <form id="form-pengeluaran">
+        <input
+          type="text"
+          id="nama-pengeluaran"
+          placeholder="Nama pengeluaran"
+          required
+        />
+        <input
+          type="number"
+          id="jumlah-pengeluaran"
+          placeholder="Jumlah pengeluaran"
+          required
+        />
+        <input type="date" id="tanggal-pengeluaran" required />
+        <select id="kategori-pengeluaran" required>
+          <option value="Makanan">Makanan</option>
+          <option value="Transportasi">Transportasi</option>
+          <option value="Kebutuhan Pokok">Kebutuhan Pokok</option>
+          <option value="Hiburan">Hiburan</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+        <button type="button" onclick="addPengeluaran()">+</button>
+      </form>
+
+    <div class="tabel-pengeluaran">
+      <table id="table-pengeluaran">
+        <thead>
+          <tr>
+            <th col-index = 1>Pengeluaran</th>
+            <th col-index = 2>Jumlah</th>
+            <th col-index = 3>Kategori</th>
+            <th col-index = 4>Tanggal
+                <select class="table-filter" onchange="filter_rows()">
+                <option value="all"></option>
+            </th>
+            <th>Pilihan</th>
+          </tr>
+        </thead>
+        <tbody id="list-pengeluaran"></tbody>
+      </table>
+    </div>
+
+    <div class="total-pengeluaran">
+      <h2>Total Pengeluaranmu: 
+        <span id="total-pengeluaran">0</span>
+      </h2>
+    </div>
+
+    <div class="filter">
+      <label for="filter-category">Filter berdasarkan kategori:</label>
+      <select id="filter-category" onchange="filterAllKategori()">
+        <option value="Semua">Semua</option>
+        <option value="Makanan">Makanan</option>
+        <option value="Transportasi">Transportasi</option>
+        <option value="Kebutuhan Pokok">Kebutuhan Pokok</option>
+        <option value="Hiburan">Hiburan</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+    </div>
+  </div>
+  <script src="./index.js"></script>
+  <script>
+    updateNamaUser();
+  </script>
+  
+</body>
+
+</html>

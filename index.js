@@ -1,41 +1,51 @@
 // buat fungsionalitas ---
 // Database awal untuk pengetesan
 
-let expenses = [
+// let expenses = [
+//   {
+//     id: Date.now() + 1,
+//     name: "Belanja bulanan",
+//     amount: 1500000,
+//     date: "2025-01-01",
+//     category: "Kebutuhan Pokok",
+//   },
+//   {
+//     id: Date.now() + 2,
+//     name: "Gojek ke kantor",
+//     amount: 35500,
+//     date: "2025-01-01",
+//     category: "Transportasi",
+//   },
+//   {
+//     id: Date.now() + 3,
+//     name: "Nonton",
+//     amount: 325500,
+//     date: "2025-02-02",
+//     category: "Hiburan",
+//   },
+//   {
+//     id: Date.now() + 4,
+//     name: "Hotel",
+//     amount: 65500,
+//     date: "2025-03-03",
+//     category: "Kebutuhan Pokok",
+//   },
+//   {
+//     id: Date.now() + 5,
+//     name: "Nasi Padang",
+//     amount: 35500,
+//     date: "2025-04-04",
+//     category: "Makanan",
+//   },
+// ];
+
+let contohPengeluaran = [
   {
-    id: Date.now() + 1,
-    name: "Belanja bulanan",
+    id: Date.now(),
+    name: "Belanja Bulanan (Hapus aku!)",
     amount: 1500000,
     date: "2025-01-01",
     category: "Kebutuhan Pokok",
-  },
-  {
-    id: Date.now() + 2,
-    name: "Gojek ke kantor",
-    amount: 35500,
-    date: "2025-01-01",
-    category: "Transportasi",
-  },
-  {
-    id: Date.now() + 3,
-    name: "Nonton",
-    amount: 325500,
-    date: "2025-02-02",
-    category: "Hiburan",
-  },
-  {
-    id: Date.now() + 4,
-    name: "Hotel",
-    amount: 65500,
-    date: "2025-03-03",
-    category: "Kebutuhan Pokok",
-  },
-  {
-    id: Date.now() + 5,
-    name: "Nasi Padang",
-    amount: 35500,
-    date: "2025-04-04",
-    category: "Makanan",
   },
 ];
 
@@ -44,6 +54,11 @@ const listPengeluaran = document.getElementById("list-pengeluaran");
 const totalPengeluaran = document.getElementById("total-pengeluaran");
 const filterKategori = document.getElementById("filter-category");
 
+if (!localStorage.getItem("expenses")) {
+  localStorage.setItem("expenses", JSON.stringify(contohPengeluaran));
+}
+
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 tampilkanPengeluaran(expenses);
 updateTotalPengeluaran();
 
@@ -67,8 +82,12 @@ function addPengeluaran() {
     date,
   };
 
-  console.log(pengeluaran);
+  // console.log(pengeluaran);
   expenses.push(pengeluaran);
+
+  //coba ke localstorage
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+
   tampilkanPengeluaran(expenses);
   updateTotalPengeluaran();
   formPengeluaran.reset();
@@ -151,6 +170,10 @@ function hapusPengeluaran(id) {
     }
   }
   expenses = newExpenses;
+
+  // Save data baru di localsorage jg
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+
   tampilkanPengeluaran(expenses);
   updateTotalPengeluaran();
 }
@@ -285,3 +308,26 @@ function filter_rows() {
 }
 
 //5. yang styling coba dr luar yaaa ekekkekek - Resya
+//function setelah submit untuk mendapatkan nama user iseng
+function isiNama() {
+  const namaUser = document.getElementById("nama-user").value;
+  console.log(namaUser);
+  if (!namaUser) {
+    alert("Nama tidak boleh kosong!");
+    return;
+  }
+  localStorage.setItem("username", namaUser);
+  location.href = "./main.html";
+}
+
+function updateNamaUser() {
+  const username = localStorage.getItem("username");
+  if (username) {
+    const namaUserElement = document.getElementById("nama-user");
+    if (namaUserElement) {
+      namaUserElement.textContent = `Laporan Keuangan ${username}`;
+    }
+  } else {
+    location.href = "./main.html";
+  }
+}
