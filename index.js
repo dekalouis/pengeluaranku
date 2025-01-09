@@ -63,12 +63,12 @@ function tampilkanPengeluaran(pengeluaran) {
       <td>${perPengeluaran.category}</td>
       <td>${perPengeluaran.date}</td>
       <td>
-        <button onclick="editExpense(${
+        <button onclick="editPengeluaran(${
           perPengeluaran.id
         })" class="button">Edit</button>
-        <button onclick="deleteExpense(${
+        <button onclick="hapusPengeluaran(${
           perPengeluaran.id
-        }) class="button"">Delete</button>
+        })" class="button"">Delete</button>
       </td>
     `;
 
@@ -82,7 +82,81 @@ function updateTotalPengeluaran() {
 }
 
 //3. bikin CRUDnya buat edit/delete dll2 - Thomy
+//Fungsi Hapus
+function hapusPengeluaran(id) {
 
+  let newExpenses = [];
+  
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id !== id) {
+      newExpenses.push(expenses[i]);
+    }
+  }
+  expenses = newExpenses;
+  tampilkanPengeluaran(expenses);
+  updateTotalPengeluaran();
+}
+
+//Fungsi Edit
+function editPengeluaran(id) {
+  
+  let edit = null;
+
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id === id) {
+      edit = expenses[i];
+      break;
+    }
+  }
+
+  
+  document.getElementById("nama-pengeluaran").value = edit.name;
+  document.getElementById("jumlah-pengeluaran").value = edit.amount;
+  document.getElementById("tanggal-pengeluaran").value = edit.date;
+  document.getElementById("kategori-pengeluaran").value = edit.category;
+
+  
+  const submitButton = document.querySelector("button[type='button']");
+  submitButton.innerText = "Update";
+  submitButton.setAttribute("onclick", `updatePengeluaran(${id})`);
+}
+
+//Fungsi Update
+function updatePengeluaran(id) {
+  const name = document.getElementById("nama-pengeluaran").value;
+  const amount = Number(document.getElementById("jumlah-pengeluaran").value);
+  const date = document.getElementById("tanggal-pengeluaran").value;
+  const category = document.getElementById("kategori-pengeluaran").value;
+
+  if (!name || !amount || !category || !date) {
+    alert(`Isi dulu yuk datanya!`);
+    return;
+  }
+
+  
+  let update = null;
+  for (let i = 0; i < expenses.length; i++) {
+    if (expenses[i].id === id) {
+      update = expenses[i];
+      break;
+    }
+  }
+
+  update.name = name;
+  update.amount = amount;
+  update.date = date;
+  update.category = category;
+
+  // Reset tombol kembali ke
+  const submitButton = document.querySelector("button[type='button']");
+  submitButton.innerText = "+";
+  submitButton.setAttribute("onclick", "addPengeluaran()");
+
+  
+  tampilkanPengeluaran(expenses);
+  updateTotalPengeluaran();
+  formPengeluaran.reset();
+}
 //4. bikin function filternya - Raden
 
 //5. yang styling coba dr luar yaaa ekekkekek - Resya
