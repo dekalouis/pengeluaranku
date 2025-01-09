@@ -34,6 +34,7 @@ function addPengeluaran() {
   //   console.log(name, amount, date, category);
   if (!name || !amount || !category || !date) {
     alert(`Isi dulu yuk datanya!`);
+    return;
   }
 
   let pengeluaran = {
@@ -59,7 +60,12 @@ function tampilkanPengeluaran(pengeluaran) {
 
     baris.innerHTML = `
     <td>${perPengeluaran.name}</td>
-      <td>Rp ${perPengeluaran.amount.toFixed(2)}</td>
+
+<td>Rp ${perPengeluaran.amount.toLocaleString("id-ID", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}</td>
+
       <td>${perPengeluaran.category}</td>
       <td>${perPengeluaran.date}</td>
       <td>
@@ -77,8 +83,15 @@ function tampilkanPengeluaran(pengeluaran) {
 }
 
 function updateTotalPengeluaran() {
-  const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-  totalPengeluaran.textContent = total.toFixed(2);
+  let total = 0;
+  for (let i = 0; i < expenses.length; i++) {
+    total += expenses[i].amount;
+  }
+  // totalPengeluaran.textContent = `Rp ${total.toFixed(2)}`;
+  totalPengeluaran.textContent = `Rp ${total.toLocaleString("id-ID", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 //3. bikin CRUDnya buat edit/delete dll2 - Thomy
