@@ -84,9 +84,8 @@ function updateTotalPengeluaran() {
 //3. bikin CRUDnya buat edit/delete dll2 - Thomy
 //Fungsi Hapus
 function hapusPengeluaran(id) {
-
   let newExpenses = [];
-  
+
   for (let i = 0; i < expenses.length; i++) {
     if (expenses[i].id !== id) {
       newExpenses.push(expenses[i]);
@@ -99,7 +98,6 @@ function hapusPengeluaran(id) {
 
 //Fungsi Edit
 function editPengeluaran(id) {
-  
   let edit = null;
 
   for (let i = 0; i < expenses.length; i++) {
@@ -109,13 +107,11 @@ function editPengeluaran(id) {
     }
   }
 
-  
   document.getElementById("nama-pengeluaran").value = edit.name;
   document.getElementById("jumlah-pengeluaran").value = edit.amount;
   document.getElementById("tanggal-pengeluaran").value = edit.date;
   document.getElementById("kategori-pengeluaran").value = edit.category;
 
-  
   const submitButton = document.querySelector("button[type='button']");
   submitButton.innerText = "Update";
   submitButton.setAttribute("onclick", `updatePengeluaran(${id})`);
@@ -133,7 +129,6 @@ function updatePengeluaran(id) {
     return;
   }
 
-  
   let update = null;
   for (let i = 0; i < expenses.length; i++) {
     if (expenses[i].id === id) {
@@ -152,7 +147,6 @@ function updatePengeluaran(id) {
   submitButton.innerText = "+";
   submitButton.setAttribute("onclick", "addPengeluaran()");
 
-  
   tampilkanPengeluaran(expenses);
   updateTotalPengeluaran();
   formPengeluaran.reset();
