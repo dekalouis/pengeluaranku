@@ -63,8 +63,12 @@ function tampilkanPengeluaran(pengeluaran) {
       <td>${perPengeluaran.category}</td>
       <td>${perPengeluaran.date}</td>
       <td>
-        <button onclick="editExpense(${perPengeluaran.id})">Edit</button>
-        <button onclick="deleteExpense(${perPengeluaran.id})">Delete</button>
+        <button onclick="editExpense(${
+          perPengeluaran.id
+        })" class="button">Edit</button>
+        <button onclick="deleteExpense(${
+          perPengeluaran.id
+        }) class="button"">Delete</button>
       </td>
     `;
 
