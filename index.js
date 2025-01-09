@@ -77,7 +77,7 @@ function updateTotalPengeluaran() {
   totalPengeluaran.textContent = total.toFixed(2);
 }
 
-//3. bikin CRUDnya buat add/edit/delete dll2 - Thomy
+//3. bikin CRUDnya buat edit/delete dll2 - Thomy
 
 //4. bikin function filternya - Raden
 
